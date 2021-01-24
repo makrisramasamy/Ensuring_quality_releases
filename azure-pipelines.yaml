@@ -26,7 +26,7 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: 'known_hosts'
-        sshPublicKey: "$(PUBLIC_KEY)""
+        sshPublicKey: "$(PUBLIC_KEY)"
         sshKeySecureFile: 'udacity_azure'
 
     - bash: |

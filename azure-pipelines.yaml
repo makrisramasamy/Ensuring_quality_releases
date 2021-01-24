@@ -61,9 +61,9 @@ stages:
         provider: 'azurerm'
         command: 'init'
         backendServiceArm: 'azurerm-sc'
-        backendAzureRmResourceGroupName: 'tstate'
-        backendAzureRmStorageAccountName: 'tstate12785'
-        backendAzureRmContainerName: 'tstate'
+        backendAzureRmResourceGroupName: 'mani-tfstate-rg1'
+        backendAzureRmStorageAccountName: 'manistorage123'
+        backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'terraform.tfstate'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
 
@@ -129,7 +129,7 @@ stages:
             displayName: Deploy Azure WebApp
             inputs:
               azureSubscription: 'azurerm-sc'
-              appName: 'lingchenzhu-webapi-AppService'
+              appName: 'mani-webapi-AppService'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/fakerestapi-$(Build.BuildId).zip
               deploymentMethod: zipDeploy

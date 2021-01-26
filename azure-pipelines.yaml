@@ -80,7 +80,7 @@ stages:
         backendAzureRmStorageAccountName: 'tstate12785'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
 
     - task: TerraformTaskV1@0
       displayName: Terraform Apply

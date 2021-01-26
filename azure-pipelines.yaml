@@ -29,14 +29,15 @@ stages:
        # sshPublicKey: "$(PUBLIC_KEY)"
         #sshKeySecureFile: 'udacity_azure'
       
-      - task: DownloadSecureFile@1
-        name: sshkey
-        displayName: 'Download SSH Public Key'
-        inputs:
+    - task: DownloadSecureFile@1
+      name: sshkey
+      displayName: 'Download SSH Public Key'
+      inputs:
             secureFile: 'udacity_azure'
-     - task: Bash@3
-       displayName: "Copy SSH key"
-       inputs:
+
+    - task: Bash@3
+      displayName: "Copy SSH key"
+      inputs:
             targetType: 'inline'
             script: |
               mkdir -p ~/.ssh

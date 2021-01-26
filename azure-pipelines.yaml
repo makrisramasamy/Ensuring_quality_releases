@@ -44,24 +44,24 @@ stages:
               cp $(sshkey.secureFilePath) ~/.ssh
               chmod 400 ~/.ssh/udacity_azure
 
-    - bash: |
-        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
-      displayName: Copy terraform.tfvars
-    - bash: |
-        echo Pipeline workspace dir is $(Pipeline.Workspace)
-        echo Terraform variable definition file is $(tfvardef.secureFilePath)
-        cd $(Agent.TempDirectory)
-        pwd
-        ls -la
-        cat udacity_azure.pub
-        cd ~/.ssh/
-        pwd
-        ls -la
-        cat known_hosts
+    #- bash: |
+    #    cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
+     # displayName: Copy terraform.tfvars
+    #- bash: |
+    #    echo Pipeline workspace dir is $(Pipeline.Workspace)
+    #    echo Terraform variable definition file is $(tfvardef.secureFilePath)
+     #   cd $(Agent.TempDirectory)
+     #   pwd
+     #   ls -la
+     #   cat udacity_azure.pub
+     #   cd ~/.ssh/
+     #   pwd
+      #  ls -la
+      #  cat known_hosts
         # $(System.DefaultWorkingDirectory) is equivalent to $(Build.SourcesDirectory)
-        cd $(System.DefaultWorkingDirectory)  
-        pwd
-        ls -la
+       # cd $(System.DefaultWorkingDirectory)  
+      #  pwd
+       # ls -la
       displayName: Verify build environment (pre)
     # install Terraform Azure Pipelines Extension by Microsoft DevLabs
     # https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks

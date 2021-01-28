@@ -45,7 +45,7 @@ stages:
               chmod 400 ~/.ssh/udacity_azure
 
     - bash: |
-    cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/
+    cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform
     
      displayName: Copy terraform.tfvars
     - bash: |

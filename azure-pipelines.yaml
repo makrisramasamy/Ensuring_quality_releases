@@ -69,8 +69,8 @@ stages:
    
         steps: 
           - task: DownloadSecureFile@1
-          name: sshkey
-          displayName: 'Download SSH Public Key'
+              name: sshkey
+displayName: 'Download SSH Public Key'
           inputs:
             secureFile: 'id_rsa.pub'
         - task: Bash@3

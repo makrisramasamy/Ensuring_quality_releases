@@ -68,7 +68,7 @@ stages:
    # https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks
    
         steps: 
-        - task: DownloadSecureFile@1
+          - task: DownloadSecureFile@1
           name: sshkey
           displayName: 'Download SSH Public Key'
           inputs:

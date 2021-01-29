@@ -29,20 +29,20 @@ stages:
     #  sshPublicKey: "$(PUBLIC_KEY)"
     #   sshKeySecureFile: 'udacity_azure'
       
-    - task: DownloadSecureFile@1
-      name: sshkey
-      displayName: 'Download SSH Public Key'
-      inputs:
-            secureFile: 'udacity_azure'
+#    - task: DownloadSecureFile@1
+#     name: sshkey
+#     displayName: 'Download SSH Public Key'
+#    inputs:
+#          secureFile: 'udacity_azure'
 
-    - task: Bash@3
-      displayName: "Copy SSH key"
-      inputs:
-            targetType: 'inline'
-            script: |
-              mkdir -p ~/.ssh
-              cp $(sshkey.secureFilePath) ~/.ssh
-              chmod 400 ~/.ssh/udacity_azure
+#  - task: Bash@3
+#    displayName: "Copy SSH key"
+#     inputs:
+#           targetType: 'inline'
+#            script: |
+#             mkdir -p ~/.ssh
+#             cp $(sshkey.secureFilePath) ~/.ssh
+#             chmod 400 ~/.ssh/udacity_azure
 
    # - bash: |
    # cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform
@@ -66,6 +66,20 @@ stages:
    #   displayName: Verify build environment (pre)
    #  install Terraform Azure Pipelines Extension by Microsoft DevLabs
    # https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks
+   
+   teps:
+        - task: DownloadSecureFile@1
+          name: sshkey
+          displayName: 'Download SSH Public Key'
+          inputs:
+            secureFile: 'id_rsa.pub'
+        - task: Bash@3
+          displayName: "Copy SSH key"
+          inputs:
+            targetType: 'inline'
+            script: |
+              mkdir -p ~/.ssh
+              cp $(sshkey.secureFilePath) ~/.ssh
    
     - task: TerraformInstaller@0
       displayName: Install Terraform

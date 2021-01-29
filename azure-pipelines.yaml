@@ -40,7 +40,8 @@ stages:
      inputs:
            targetType: 'inline'
             script: |
-             mkdir -p ~/.ssh cp $(sshkey.secureFilePath) ~/.ssh
+             mkdir -p ~/.ssh
+             cp $(sshkey.secureFilePath) ~/.ssh
              chmod 400 ~/.ssh/udacity_azure
 
    # - bash: |

@@ -67,7 +67,7 @@ stages:
    #  install Terraform Azure Pipelines Extension by Microsoft DevLabs
    # https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks
    
-   teps:
+    steps:
         - task: DownloadSecureFile@1
           name: sshkey
           displayName: 'Download SSH Public Key'

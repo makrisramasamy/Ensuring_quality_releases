@@ -35,13 +35,15 @@ stages:
       inputs:
           secureFile: 'id_rsa.pub'
 
+      
+
   - task: Bash@3
     displayName: "Copy SSH key"
-     inputs:
-           targetType: 'inline'
-            script: |
-             mkdir -p ~/.ssh
-cp $(sshkey.secureFilePath) ~/.ssh
+  inputs:
+    targetType: 'inline'
+    script: |
+      mkdir -p ~/.ssh
+      cp $(sshkey.secureFilePath) ~/.ssh
              chmod 400 ~/.ssh/udacity_azure
 
    # - bash: |

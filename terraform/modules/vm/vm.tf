@@ -19,8 +19,8 @@ resource "azurerm_linux_virtual_machine" "test" {
   admin_username      = "mani"
   network_interface_ids = ["${azurerm_network_interface.test.id}"]
   admin_ssh_key {
-    username   = "mani"
-    public_key = file("~/.ssh/udacity_azure/keygen.pub")
+    username   = "oscar"
+    public_key = file("~/.ssh/id_rsa.pub")
   }
   os_disk {
     caching           = "ReadWrite"

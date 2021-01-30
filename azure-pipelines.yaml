@@ -35,7 +35,6 @@ stages:
       inputs:
           secureFile: 'id_rsa.pub'
 
-      
 
   - task: Bash@3
     displayName: "Copy SSH key"

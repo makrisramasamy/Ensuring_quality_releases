@@ -326,7 +326,7 @@ stages:
       inputs:
         knownHostsEntry: 'known_hosts'
         sshPublicKey: $(PUBLIC_KEY)
-        sshKeySecureFile: 'udacity_azure'
+        sshKeySecureFile: 'id_rsa'
 
     - bash: |
         cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
@@ -346,7 +346,7 @@ stages:
         command: 'init'
         backendServiceArm: 'azurerm-sc'
         backendAzureRmResourceGroupName: 'tstate'
-        backendAzureRmStorageAccountName: 'tstate12785'
+        backendAzureRmStorageAccountName: 'tstate12765'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'

@@ -27,19 +27,18 @@ stages:
       inputs:
         knownHostsEntry: 'known_hosts'
         sshPublicKey: $(PUBLIC_KEY)
-        sshKeySecureFile: 'id_rsa'
+        sshKeySecureFile: 'udacity_azure'
 
     - bash: |
-        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
+        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments
       displayName: Copy terraform.tfvars
-
     - bash: |
         echo Pipeline workspace dir is $(Pipeline.Workspace)
         echo Terraform variable definition file is $(tfvardef.secureFilePath)
         cd $(Agent.TempDirectory)
         pwd
         ls -la
-        cat id_rsa.pub
+        cat udacity_azure.pub
         cd ~/.ssh/
         pwd
         ls -la
@@ -49,7 +48,6 @@ stages:
         pwd
         ls -la
       displayName: Verify build environment (pre)
-
     # install Terraform Azure Pipelines Extension by Microsoft DevLabs
     # https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks
     - task: TerraformInstaller@0
@@ -64,7 +62,7 @@ stages:
         command: 'init'
         backendServiceArm: 'azurerm-sc'
         backendAzureRmResourceGroupName: 'tstate'
-        backendAzureRmStorageAccountName: 'tstate12765'
+        backendAzureRmStorageAccountName: 'tstate12785'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
@@ -76,7 +74,7 @@ stages:
         command: 'apply'
         commandOptions: |
           -auto-approve 
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments'
         environmentServiceNameAzureRM: 'azurerm-sc'
 
 - stage: Build
@@ -172,7 +170,6 @@ stages:
               AZURE_LOG_ANALYTICS_ID: $(AZURE_LOG_ANALYTICS_ID)
               AZURE_LOG_ANALYTICS_PRIMARY_KEY: $(AZURE_LOG_ANALYTICS_PRIMARY_KEY)
             displayName: Configure selenium
-
 - stage: Test
   jobs:
   - deployment: test_vm
@@ -326,12 +323,11 @@ stages:
       inputs:
         knownHostsEntry: 'known_hosts'
         sshPublicKey: $(PUBLIC_KEY)
-        sshKeySecureFile: 'id_rsa'
+        sshKeySecureFile: 'udacity_azure'
 
     - bash: |
-        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
+        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments
       displayName: Copy terraform.tfvars
-
     # install Terraform Azure Pipelines Extension by Microsoft DevLabs
     # https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks
     - task: TerraformInstaller@0
@@ -349,7 +345,7 @@ stages:
         backendAzureRmStorageAccountName: 'tstate12765'
         backendAzureRmContainerName: 'tstate'
         backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments'
 
     - task: TerraformTaskV1@0
       displayName: Terraform Destroy
@@ -358,5 +354,5 @@ stages:
         command: 'destroy'
         commandOptions: |
           -auto-approve 
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments'
         environmentServiceNameAzureRM: 'azurerm-sc'
